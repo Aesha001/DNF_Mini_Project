@@ -1,0 +1,55 @@
+{% extends 'core/hf.html' %}
+{% load static %}
+
+{% block body %}
+
+      <!-- inner page section -->
+      <section class="inner_page_head">
+        <div class="container_fuild">
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="full">
+                    <h3>Contact us</h3>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </section>
+     <!-- end inner page section -->
+     <!-- why section -->
+    <!-- why section -->
+<section class="why_section layout_padding">
+   <div class="container">
+   
+       <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+               <div class="full">
+                   <form method="post">
+                    {% if messages %}
+                  <div class="alert {% for message in messages %}{% if message.tags == 'error' %}alert-danger{% elif message.tags == 'info' %}alert-success{% endif %}{% endfor %}" role="alert">
+                      {% for message in messages %}
+                          {{ message }}
+                      {% endfor %}
+                  </div>
+                  {% endif %}
+                       {% csrf_token %}
+                       {{ form.as_p }}
+                       <input type="submit" value="Submit" />
+                       <!-- <fieldset>
+                           <input type="text" placeholder="Enter your full name" name="name" required />
+                           <input type="email" placeholder="Enter your email address" name="email" required />
+                           <input type="text" placeholder="Enter subject" name="subject" required />
+                           <textarea placeholder="Enter your message" name="message" required></textarea>
+                          
+                       </fieldset> -->
+                   </form>
+               </div>
+           </div>
+       </div>
+   </div>
+</section>
+<!-- end why section -->
+
+     <!-- end why section -->
+
+{% endblock %}

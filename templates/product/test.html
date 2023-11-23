@@ -1,0 +1,119 @@
+{% extends 'core/hf.html' %}
+{% load static %}
+
+{% block body %}
+    <!-- inner page section -->
+    <section class="inner_page_head">
+        <div class="container_fuild">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <h3>Wishlist</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end inner page section -->
+
+    <!-- wishlist section -->
+    <section class="wishlist_section layout_padding">
+        <div class="container">
+            <div class="wishlist-item">
+                <div class="wishlist-image">
+                    <img src="{% static 'sample_product1.jpg' %}" alt="Product 1">
+                </div>
+                <div class="wishlist-details">
+                    <h4>Product 1</h4>
+                    <p>Price: $20.00</p>
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1">
+                    <button type="button" style="background-color: #f7444e;" ><b>Add to Cart</b></button>
+                    <button type="button" style="background-color: #f7444e;"><b>Remove</b></button>
+                </div>
+            </div>
+
+            <!-- Add more wishlist items as needed -->
+
+            <!-- Empty Wishlist Message -->
+            <div class="empty-wishlist">
+                <p>Your wishlist is empty.</p>
+            </div>
+        </div>
+    </section>
+    <!-- end wishlist section -->
+
+    <style>
+        .wishlist_section {
+            padding: 50px 0;
+        }
+
+        .wishlist-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wishlist-image {
+            flex: 0 0 30%;
+        }
+
+        .wishlist-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .wishlist-details {
+            flex: 0 0 60%;
+            padding-left: 20px;
+        }
+
+        .wishlist-details h4 {
+            margin-top: 0;
+        }
+
+        .wishlist-details p {
+            margin-bottom: 10px;
+        }
+
+        .wishlist-details label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .wishlist-details input {
+            width: 50px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .wishlist-details button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .wishlist-details button:hover {
+            background-color: #0056b3;
+        }
+
+        .empty-wishlist {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+        }
+    </style>
+
+{% endblock %}

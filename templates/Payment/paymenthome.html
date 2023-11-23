@@ -1,0 +1,124 @@
+{% extends 'core/hf.html' %}
+{% load static %}
+
+{% block body %}
+
+<!-- inner page section -->
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Payment</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end inner page section -->
+<!-- payment section -->
+<section class="payment_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="payment-details">
+                    <h2>Order Summary</h2>
+                    <!-- Display the products in the cart with their details -->
+                    <!-- <ul>
+                        {% for cart_item in cart_items %}
+                            <li>{{ cart_item.product.P_name }} - {{ cart_item.quantity }} x {{ cart_item.product.P_Price }}</li>
+                        {% endfor %}
+                    </ul> -->
+                    <h4>Total Amount: {{ total }}</h4>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="payment-form">
+                    <h2>Payment Information</h2>
+                    <form action="#" method="post">
+                        <!-- {% csrf_token %} -->
+                        <!-- Add your payment form fields here -->
+                        <label for="card_number">Card Number:</label>
+                        <input type="text" id="card_number" name="card_number" required>
+                        
+                        <label for="expiry_date">Expiry Date:</label>
+                        <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>
+                        
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" name="cvv" required>
+                        
+                        <button type="submit" style="background-color: #f7444e;">Pay Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .payment_section {
+        padding: 50px 0;
+    }
+
+    .payment-details {
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .payment-details h2 {
+        margin-top: 0;
+    }
+
+    .payment-details ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .payment-details li {
+        margin-bottom: 10px;
+    }
+
+    .payment-details h4 {
+        margin-top: 20px;
+    }
+
+    .payment-form {
+        padding: 20px;
+        box-sizing: border-box;
+        background-color: #f2f2f2;
+        border-radius: 10px;
+    }
+
+    .payment-form h2 {
+        margin-top: 0;
+    }
+
+    .payment-form label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .payment-form input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+
+    .payment-form button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .payment-form button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+{% endblock %}

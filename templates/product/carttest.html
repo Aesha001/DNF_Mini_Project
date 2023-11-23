@@ -1,0 +1,105 @@
+{% extends 'core/hf.html' %}
+{% load static %}
+
+{% block body %}
+    <!-- inner page section -->
+    <section class="inner_page_head">
+        <div class="container_fuild">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <h3>Shopping Cart</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end inner page section -->
+
+    <!-- cart section -->
+    <section class="cart_section layout_padding">
+        <div class="container">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Product 1</td>
+                        <td>$20.00</td>
+                        <td>2</td>
+                        <td>$40.00</td>
+                        <td>
+                            <button type="button" onclick="removeFromCart('Product 1')">Remove</button>
+                        </td>
+                    </tr>
+                    <!-- Add more rows for additional cart items -->
+
+                    <!-- Empty Cart Message -->
+                    <tr>
+                        <td colspan="5">Your shopping cart is empty.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="cart-total">
+                <h4>Total: $60.00</h4>
+                <button type="button" style="background-color: #f7444e;">Proceed to Checkout</button>
+            </div>
+        </div>
+    </section>
+    <!-- end cart section -->
+
+    <style>
+        .cart_section {
+            padding: 50px 0;
+        }
+
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .cart-table th,
+        .cart-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .cart-table th {
+            background-color: #f2f2f2;
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .cart-total h4 {
+            margin-top: 0;
+        }
+
+        .cart-total button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cart-total button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+{% endblock %}

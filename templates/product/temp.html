@@ -1,0 +1,89 @@
+{% extends 'core/hf.html' %}
+{% load static %}
+
+{% block body %}
+    <!-- inner page section -->
+    <section class="inner_page_head">
+        <div class="container_fuild">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <h3>Wishlist</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end inner page section -->
+
+    <!-- wishlist section -->
+    <section class="wishlist_section layout_padding">
+        <div class="container">
+            {% if wishlist_items %}
+                <div class="row">
+                    {% for item in wishlist_items %}
+                        <div class="col-md-4">
+                            <div class="wishlist-item">
+                                <div class="wishlist-image">
+                                    <img src="{{ item.product.P_Image.url }}" alt="{{ item.product.P_name }}">
+                                </div>
+                                <div class="wishlist-details">
+                                    <h4>{{ item.product.P_name }}</h4>
+                                    <p>Price: {{ item.product.P_Price }}</p>
+                                    <button type="button" onclick="addToCart('{{ item.product.P_name }}')">Add to Cart</button>
+                                    <button type="button" onclick="removeFromWishlist('{{ item.product.P_name }}')">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Your wishlist is empty.</p>
+            {% endif %}
+        </div>
+    </section>
+    <!-- end wishlist section -->
+
+    <style>
+        .wishlist_section {
+            padding: 50px 0;
+        }
+
+        .wishlist-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .wishlist-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .wishlist-details h4 {
+            margin-top: 0;
+        }
+
+        .wishlist-details p {
+            margin-bottom: 15px;
+        }
+
+        .wishlist-details button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .wishlist-details button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+{% endblock %}

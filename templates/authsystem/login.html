@@ -1,0 +1,57 @@
+{% extends 'core/hf.html' %}
+{% load static %}
+
+{% block body %}
+
+<section class="inner_page_head">
+   <div class="container_fuild">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="full">
+               <h3> 
+                  Login 
+               </h3>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<section class="why_section layout_padding">
+   <div class="container">
+   
+      <div class="row">
+         <div class="col-lg-8 offset-lg-2">
+            <div class="full">
+               <form action="." method="post">
+                  {% if messages %}
+                  <div class="alert {% for message in messages %}{% if message.tags == 'error' %}alert-danger{% elif message.tags == 'info' %}alert-success{% endif %}{% endfor %}" role="alert">
+                      {% for message in messages %}
+                          {{ message }}
+                      {% endfor %}
+                  </div>
+                  {% endif %}
+              
+
+
+                  {% csrf_token %}
+                  {{form.as_p}}
+                  <a href="{% url 'authsystem:password_reset' %}"  class="text-dangaer"><small><u>Forgot Password?</u></small></a>
+                  {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                    <p class="alert alert-danger my-3">{{error}}</p>
+                    {% endfor %}
+                {% endif %}
+                     <input type="submit" value="Submit" />
+                     <div class="text-center fw-bold">
+                       <small><u>Create New Account?</u><a href="{% url 'authsystem:myregister' %}"  class="text-dangaer">Click here</a></small>                        
+                     </div>
+
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+{% endblock %}

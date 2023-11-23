@@ -1,0 +1,86 @@
+{% extends 'core/hf.html' %}
+{% load static %}
+
+{% block body %}
+
+<!-- inner page section -->
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Wishlist</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end inner page section -->
+
+<!-- wishlist section -->
+<section class="wishlist_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="wishlist-table">
+                    <thead>
+                        <tr>
+                            <th>Product Image</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in wishlist %}
+                    
+                        <tr>
+                            <td><img src="{{item.product_id.P_Image.url}}" height="100" alt="product"></td>
+                            <td>{{item.product_id.P_name}}</td>
+                            <td>RS{{item.product_id.P_Price}}</td>
+                            <td><a href="{% url 'product:delete_item' item.id %}">Remove</a></td>
+                        </tr>
+                        <!-- Repeat similar rows for each product in the wishlist -->
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end wishlist section -->
+
+<style>
+    .wishlist_section {
+        padding: 50px 0;
+    }
+
+    .wishlist-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .wishlist-table th,
+    .wishlist-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .wishlist-table th {
+        background-color: #f2f2f2;
+    }
+
+    .wishlist-table a {
+        color: #f7444e;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .wishlist-table a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+{% endblock %}

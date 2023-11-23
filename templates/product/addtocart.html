@@ -1,0 +1,129 @@
+{% extends 'core/hf.html' %}
+{% load static %}
+
+{% block body %}
+<!-- inner page section -->
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Shopping Cart</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end inner page section -->
+
+<!-- cart section -->
+<section class="cart_section layout_padding">
+    <div class="container">
+        <form method="post" action="{% url 'product:showcart' %}">
+            {% if messages %}
+                  <div class="alert {% for message in messages %}{% if message.tags == 'error' %}alert-danger{% elif message.tags == 'info' %}alert-success{% endif %}{% endfor %}" role="alert">
+                      {% for message in messages %}
+                          {{ message }}
+                      {% endfor %}
+                  </div>
+                  {% endif %}
+            {% csrf_token %}
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product Image</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart_item in cart_items %}
+                    <tr>
+                        <td><img src="{{ cart_item.product.P_Image.url }}" height="100" alt="product"></td>
+                        <td>{{ cart_item.product.P_name }}</td>
+                        <td>{{ cart_item.product.P_Price }}</td>
+                        <td>
+                            <input type="" name="quantity_{{ cart_item.id }}" value="{{ cart_item.quantity }}">
+                            <input type="hidden" name="cart_item_id" value="{{ cart_item.id }}">
+                        </td>
+                        <td>{{ cart_item.total_cost }}</td>
+                        <td>
+                            <button type="submit" name="update_quantity" value="{{ cart_item.id }}">Update</button>
+                            <button type="submit" name="remove_item" value="{{ cart_item.id }}">Remove</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- <div style="margin-top: 20px; text-align: right;">
+                <button type="submit">Update Quantities</button>
+            </div> -->
+        </form>
+        <div class="cart-total">
+            <h4>Total Amount = {{ total }}</h4>
+            
+            <a href="{% url 'product:order_create' %}">
+                <button type="button" style="background-color: #f7444e;">Proceed to Checkout</button>
+            </a>
+          
+        </div>
+
+    </div>
+</section>
+<!-- end cart section -->
+
+<style>
+    .cart_section {
+        padding: 50px 0;
+    }
+
+    .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .cart-table th,
+    .cart-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .cart-table th {
+        background-color: #f2f2f2;
+    }
+
+    .cart-total {
+        margin-top: 20px;
+        text-align: right;
+    }
+
+    .cart-total h4 {
+        margin-top: 0;
+    }
+
+    .cart-total button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .cart-total button:hover {
+        background-color: #0056b3;
+    }
+
+    input[type="number"] {
+        width: 40px;
+        text-align: center;
+    }
+</style>
+
+{% endblock %}

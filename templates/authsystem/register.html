@@ -1,0 +1,62 @@
+{% extends 'core/hf.html' %}
+{% load static %}
+
+{% block body %}
+
+<section class="inner_page_head">
+   <div class="container_fuild">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="full">
+               <h3> 
+                  Register
+               </h3>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+<section class="why_section layout_padding">
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-8 offset-lg-2">
+            <div class="full">
+               <form action="." method="POST" class="form">
+                  {% csrf_token %}
+                  {% if messages %}
+                  <div class="alert {% for message in messages %}{% if message.tags == 'error' %}alert-danger{% elif message.tags == 'info' %}alert-success{% endif %}{% endfor %}" role="alert">
+                      {% for message in messages %}
+                          {{ message }}
+                      {% endfor %}
+                  </div>
+                  {% endif %}
+                  {{form.as_p}}
+                  <input type="submit" value="Submit" />
+                  <!-- <fieldset>
+                     <input type="text" placeholder="Enter your full name" name="name" required />
+                     <input type="email" placeholder="Enter your email address" name="email" required />
+                     <input type="text" placeholder="Enter subject" name="subject" required />
+                     <textarea placeholder="Enter your message" required></textarea>
+                     <input type="submit" value="Submit" />
+                  </fieldset> -->
+                  
+                  <div class="text-center text-primary fw-bold">
+                     <small> <u>Already have an account?</u><a href="{% url 'authsystem:login' %}"  class="text-dangaer">Login here</a></small>
+                     <!-- <input type="submit" value="Already have Account Login here" /> -->
+                  </div>
+<!-- 
+                  {% if messages %}
+                  {% for msg in messages %}
+                  <div class="alert alert-{{msg.tags}}" role="alert">{{msg}}</div>
+                  {% endfor %}
+                  {% endif %} -->
+               </form>
+              
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+{% endblock %}

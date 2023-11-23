@@ -1,0 +1,7 @@
+<form method="post">
+    {% csrf_token %}
+    <div>
+        {{ form.as_p }}
+        <input type="submit" name="Send Mail">
+    </div>
+</form>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+   <!-- Basic -->
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <!-- Mobile Metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <!-- Site Metas -->
+   <meta name="keywords" content="" />
+   <meta name="description" content="" />
+   <meta name="author" content="" />
+   <link rel="shortcut icon" href="{% static '/images/l2.png' %}" type="">
+   <title>DARK N FREED</title>
+   <!-- bootstrap core css -->
+   <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.css' %}" />
+   <!-- font awesome style -->
+   <link href="{% static '/css/font-awesome.min.css' %}" rel="stylesheet" />
+   <!-- Custom styles for this template -->
+   <link href="{% static '/css/style.css' %}" rel="stylesheet" />
+   <!-- responsive style -->
+   <link href="{% static '/css/responsive.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+
+   <div class="hero_area">
+      <!-- header section strats -->
+      <header class="header_section">
+         <div class="container">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+
+               <a class="navbar-brand" href="{% url 'core:home' %}">
+                  <img width="150" style="border-radius:10%;" src="{% static '/images/l2.png' %}" alt="#" />
+               </a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class=""> </span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+
+                     {% if user.is_authenticated %}
+
+                     <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'core:home' %}">Home <span class="sr-only">(current)</span></a>
+                     </li>
+
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Products <span
+                                 class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                           <li><a href="{% url 'product:category' 'M' %}">Man Collections</a></li>
+                           <li><a href="{% url 'product:category' 'W' %}">Women Collections</a></li>
+                           <li><a href="{% url 'product:category' 'A' %}">All Product</a></li>
+
+                        </ul>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:blog' %}">Blog</a>
+                     </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:aboutus' %}">AboutUs</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'product:contactus' %}">Contact</a>
+                     </li>
+                     <form method="GET" action="{% url 'core:search' %}" class="form-inline">
+                        {% csrf_token %}
+                        <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search product"
+                           aria-label="Search">
+                        <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                           <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+                        </button>
+                     </form>
+
+
+
+
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="true"> <span class="nav-label"> {{ detail.first_name }}
+                              <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                           <li><a href="{% url 'core:profile' %}">Profile</a></li>                           
+                           <li><a href="{% url 'product:showcart' %}">Your Cart</a></li>
+                           <li><a href="{% url 'product:wishlist_show' %}">Your Wishlist</a></li>
+                           <li><a href="{% url 'authsystem:login' %}">Logout</a></li>
+                           
+                        </ul>
+                     </li>
+                     {% endif %}
+                     {% if not user.is_authenticated %}
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'authsystem:login' %}">Login</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'authsystem:myregister' %}">Register</a>
+                     </li>
+                     {% endif %}
+                  </ul>
+               </div>
+            </nav>
+         </div>
+      </header>
+      <!-- end header section -->
+
+      <!-- slider section -->
+      <section class="slider_section ">
+         <div class="slider_bg_box">
+            <img src="{% static '/images/banner.png' %}" alt="">
+         </div>
+         <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container ">
+                     <div class="row">
+                        <div class="col-md-7 col-lg-6 ">
+                           <div class="detail-box">
+                              <h1>
+                                 <span>
+                                    Sale 10% Off
+                                 </span>
+                                 <br>
+                                 On T-Shirts
+                              </h1>
+                              <p>
+                                 Attention, fashion enthusiasts! We are thrilled to introduce our latest offer that adds
+                                 a touch of style to your wardrobe without breaking the bank. It’s the perfect
+                                 opportunity to upgrade your fashion game without compromising your budget. </p>
+                              <div class="btn-box">
+                                 <a href="{% url 'product:category' 'A' %}" class="btn1">
+                                    Shop Now
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item ">
+                  <div class="container ">
+                     <div class="row">
+                        <div class="col-md-7 col-lg-6 ">
+                           <div class="detail-box">
+                              <h1>
+                                 <span>
+                                    Sale 20% Off
+                                 </span>
+                                 <br>
+                                 On Hoddies
+                              </h1>
+                              <p>
+                                 This season, embrace the chill in style with our exclusive hoodie collection, now
+                                 available at a fabulous 20% discount! Snuggle up in our high-quality, trendy hoodies.
+                                 Hurry, the offer won’t last long. Grab your favorite hoodie today and step out in
+                                 comfort and confidence!
+                              <div class="btn-box">
+                                 <a href="{% url 'product:category' 'A' %}" class="btn1">
+                                    Shop Now
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container ">
+                     <div class="row">
+                        <div class="col-md-7 col-lg-6 ">
+                           <div class="detail-box">
+                              <h1>
+                                 <span>
+                                    Sale 10% Off
+                                 </span>
+                                 <br>
+                                 for New User
+                              </h1>
+                              <p>
+                                 We're thrilled to have you on board! As a token of our appreciation, all new users can
+                                 enjoy an exclusive 10% discount on their first purchase. Dive into our diverse range of
+                                 products, find your favorites, and let the savings begin. Happy shopping! </p>
+                              <div class="btn-box">
+                                 <a href="{% url 'product:category' 'A' %}" class="btn1">
+                                    Shop Now
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="container">
+               <ol class="carousel-indicators">
+                  <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+                  <li data-target="#customCarousel1" data-slide-to="1"></li>
+                  <li data-target="#customCarousel1" data-slide-to="2"></li>
+               </ol>
+            </div>
+         </div>
+      </section>
+      <!-- end slider section -->
+   </div>
+
+
+
+   {% block body %}
+
+   {% endblock %}
+
+
+
+
+   <!-- footer start -->
+   <footer>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-4">
+               <div class="full">
+                  <div class="logo_footer">
+                     <a href="{% url 'core:home' %}"><img width="210" style="border-radius:10%;" src="{% static '/images/l2.png' %}"
+                           alt="#" /></a>
+                  </div>
+                  <div class="information_f">
+                     <p><strong>ADDRESS:</strong> Comming Soon...</p>
+                     <p><strong>TELEPHONE:</strong> +91 987 654 3210</p>
+                     <p><strong>EMAIL:</strong> darknfreed23@gmail.com</p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-8">
+               <div class="row">
+                  <div class="col-md-7">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <div class="widget_menu">
+                              <h3>Menu</h3>
+                              <ul>
+                                 <li><a href="{% url 'core:home' %}">Home</a></li>
+                                 <li><a href="{% url 'core:aboutus' %}">About</a></li>
+                                 <li><a href="{% url 'core:home' %}">Services</a></li>
+                                 <li><a href="{% url 'core:home' %}">Testimonial</a></li>
+                                 <li><a href="{% url 'core:blog' %}">Blog</a></li>
+                                 <li><a href="{% url 'product:contactus' %}">Contact</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="widget_menu">
+                              <h3>Account</h3>
+                              <ul>
+                                 <li><a href="{% url 'core:profile' %}">Account</a></li>
+                                 <li><a href="#">Checkout</a></li>
+                                 <li><a href="{% url 'authsystem:login' %}">Login</a></li>
+                                 <li><a href="{% url 'authsystem:myregister' %}">Register</a></li>
+                                 <li><a href="{% url 'product:product' %}">Shopping</a></li>
+
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-5">
+                     <div class="widget_menu">
+                        <h3>Newsletter</h3>
+                        <div class="information_f">
+                           <p>Subscribe by our newsletter and get update protidin.</p>
+                        </div>
+                        <div class="form_sub">
+                           <form>
+                              <fieldset>
+                                 <div class="field">
+                                    <input type="email" placeholder="Enter Your Mail" name="email" />
+                                    <input type="submit" value="Subscribe" />
+                                 </div>
+                              </fieldset>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- footer end -->
+   <div class="cpy_">
+      <p>© 2023 All Rights Reserved By</a></p>
+   </div>
+   <!-- jQery -->
+   <script src="{% static '/js/jquery-3.4.1.min.js' %}"></script>
+   <!-- popper js -->
+   <script src="{% static '/js/popper.min.js' %}"></script>
+   <!-- bootstrap js -->
+   <script src="{% static '/js/bootstrap.js' %}"></script>
+   <!-- custom js -->
+   <script src="{% static '/js/custom.js' %}"></script>
+
+
+
+
+
+</body>
+
+</html>

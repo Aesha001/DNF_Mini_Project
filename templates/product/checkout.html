@@ -1,0 +1,119 @@
+{% extends 'core/hf.html' %}
+{% load static %}
+
+{% block body %}
+
+<!-- inner page section -->
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Checkout</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end inner page section -->
+<!-- checkout section -->
+<section class="checkout_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="billing-details">
+                    <h2>Billing Information</h2>
+                    <form method="post" action="{% url 'product:order_create' %}">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" style="background-color: #f7444e;">Place Order</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    <!-- Display the selected product and its details -->
+                    <ul>
+                        {% for item in order_items %}
+                        <li>{{ item.item.P_name }} - Quantity: {{ item.quantity }} - Price: {{ item.price }}</li>
+                        {% endfor %}
+                    </ul>
+                    <h4>Total Amount: {{ total }} Rs</h4>
+
+                    <p>Discount: -{{ discount }} Rs</p>
+                    <h4>Discounted Total: {{ discounted_total }} Rs</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .checkout_section {
+        padding: 50px 0;
+    }
+
+    .billing-details {
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .billing-details h2 {
+        margin-top: 0;
+    }
+
+    .billing-details label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .billing-details input,
+    .billing-details textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+
+    .billing-details button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .billing-details button:hover {
+        background-color: #0056b3;
+    }
+
+    .order-summary {
+        padding: 20px;
+        box-sizing: border-box;
+        background-color: #f2f2f2;
+        border-radius: 10px;
+    }
+
+    .order-summary h2 {
+        margin-top: 0;
+    }
+
+    .order-summary ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .order-summary li {
+        margin-bottom: 10px;
+    }
+
+    .order-summary h4 {
+        margin-top: 20px;
+    }
+</style>
+
+{% endblock %}

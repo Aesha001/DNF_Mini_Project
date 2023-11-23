@@ -1,0 +1,154 @@
+{% extends 'core/hf.html' %}
+{% load static %}
+
+{% block body %}
+
+<!-- inner page section -->
+<section class="inner_page_head">
+    <div class="container_fuild">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <h3>Product Detail</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end inner page section -->
+<!-- product section -->
+<section class="product_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="box">
+                    <div class="option_container">
+
+                    </div>
+                    <div class="img-box">
+                        <img src="{{pro.P_Image.url}}" alt="">
+                    </div>
+
+                    <div class="detail-box">
+                        <h5>
+                            {{pro.P_name}}
+                        </h5>
+                    </div>
+                    <div class="detail-box">
+                        <h6>
+                            {{pro.P_Price}}
+                        </h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="product-details">
+                    <h2>{{ pro.P_name }}</h2>
+                    <p>{{ pro.P_Desc }}</p>
+                    <b><p>Price: </b>{{ pro.P_Price }}</p>
+                    <label for="size"><b>Select Size:</b></label>
+                    <select id="size" name="size">
+                        <option value="small">S</option>
+                        <option value="medium">M</option>
+                        <option value="large">L</option>
+                        <option value="large">XL</option>
+                    </select>
+                    <div class="btn-box">
+                        
+                        <form action="{% url 'product:add_to_cart' prod_id=pro.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" style="background-color: #f7444e;">Add to Cart</button>
+                        </form>
+                    
+                        
+                    <button type="button" style="background-color: #f7444e;">Add to Wishlist</button>
+                    <button type="button" style="background-color: #f7444e;">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
+
+    
+    <!-- <div class="btn-box">
+        <a href="">
+            View All products
+        </a>
+    </div> -->
+</section>
+
+<style>
+
+    
+    .product_section {
+        padding: 50px 0;
+    }
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Make the box take full height */
+    }
+
+    .img-box {
+        flex: 1; /* Allow the image box to take the available space */
+    }
+
+    .img-box img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product-details {
+        padding: 20px;
+        box-sizing: border-box;
+        height: 100%; /* Make the details box take full height */
+    }
+
+    .product-details h2 {
+        margin-top: 0;
+    }
+
+    .product-details p {
+        margin-bottom: 15px;
+    }
+
+    .product-details label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .product-details select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+
+    .product-details button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    .product-details button:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-box {
+        margin-top: 20px;
+    }
+</style>
+
+
+
+{% endblock %}
