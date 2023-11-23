@@ -317,7 +317,7 @@ def wishlist_show(request):
     user_id = CustomUser.objects.get(pk=request.user.id)
     wishlist_product = WishListProduct.objects.filter(customer_id= user_id)
     
-    return render(request, 'product/wishlist.html',{'wishlist': wishlist_product,'detail': login_user})
+    return render(request, 'product/wishlist.html',{'wishlist': wishlist_product,'detail': login_user,'messages': messages.get_messages(request)})
 
 def delete_item(request, product_id):
     prod = WishListProduct.objects.get(pk=product_id)

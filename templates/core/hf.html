@@ -82,6 +82,7 @@
                               aria-haspopup="true" aria-expanded="true"> <span class="nav-label"> {{ detail.first_name }}
                                  <span class="caret"></span></a>
                            <ul class="dropdown-menu">
+                              <li><a href="{% url 'core:profile' %}">Profile</a></li>  
                               <li><a href="{% url 'product:showcart' %}">Your Cart</a></li>
                               <li><a href="{% url 'product:wishlist_show' %}">Your Wishlist</a></li>
                               <li><a href="{% url 'authsystem:login' %}">Logout</a></li>
