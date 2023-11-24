@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+from django.shortcuts import get_object_or_404
+
+from product.models import Order
 
 # Create your views here.
 from django.shortcuts import render
@@ -41,7 +46,7 @@ def home(request):
 @csrf_exempt
 def success(request):
     
-    
+    orders = Order.objects.all().order_by('-created')[:5]
     if request.method == "POST":
         a = request.POST
         order_id = ""
@@ -61,7 +66,7 @@ def success(request):
         #             ["rajlogicrays@gmail.com"],# [user.email],
         #             html_message=msg_html)
 
-    return render(request, "PayOnline/success.html")
+    return render(request, "PayOnline/success.html",{'orders': orders})
 
 
 # def download_orders(request):
@@ -76,3 +81,33 @@ def success(request):
 #         response['Content-Disposition'] = 'attachment; filename="orders.pdf"'
 #         return response
 #     return response
+
+
+def generate_invoice(request, order_id):
+    # order = get_object_or_404(Order, id=order_id)
+    order = Order.objects.get(id=order_id)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename=invoice_{order.id}.pdf'
+
+    # Create a PDF object
+    pdf = canvas.Canvas(response)
+
+    # Add content to the PDF
+    pdf.drawString(100, 800, f"Invoice for Order #{order.id}")
+    pdf.drawString(100, 780, f"Customer: {order.Full_name}")
+    pdf.drawString(100, 760, "Items:")
+    
+    # Display order items
+    y_position = 740
+    for item in order.items.all():
+        pdf.drawString(120, y_position, f"{item.quantity} x {item.item.P_name} - Rs{item.price}")
+        y_position -= 20
+
+    # Add total amount
+    pdf.drawString(100, y_position, f"Total Amount: Rd{order.get_total_cost()}")
+
+    # Close the PDF object
+    pdf.showPage()
+    pdf.save()
+
+    return response
