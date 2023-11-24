@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from authsystem.forms import LoginForm,MyPasswordResetForm,MySetPasswordForm
 from django.contrib.auth import views as auth_view
+from PayOnline.views import generate_invoice
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,6 +29,8 @@ urlpatterns = [
     path('product/', include('product.urls')),
     path('',include("PayOnline.urls", namespace='PayOnline')),
     path('', include('mailapp.urls', namespace='mailapp')),
+
+    path('generate_invoice/<int:order_id>/', generate_invoice, name='generate_invoice'),  #---------
     
     
      path('password-reset/',auth_view.PasswordResetView.as_view(template_name='authsystem/password_reset.html',form_class=MyPasswordResetForm),name="password_reset"),
